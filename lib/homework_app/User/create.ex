@@ -1,4 +1,4 @@
-defmodule HomeworkApp.Create do
+defmodule HomeworkApp.User.Create do
   alias HomeworkApp.Schemas.User
   alias HomeworkApp.Schemas.Questions
   alias HomeworkApp.Schemas.Answers

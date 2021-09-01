@@ -4,6 +4,8 @@ defmodule HomeworkApp.Schemas.User do
 
   @primary_key {:id, :binary_id, autogenerate: true}
 
+  @derive {Jason.Encoder, only: [:id, :username, :email]}
+
   schema "users" do
     field :username, :string, size: 15
     field :email, :string
