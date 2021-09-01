@@ -11,4 +11,5 @@ defmodule HomeworkApp do
   """
   defdelegate create_user(params), to: CreateUser, as: :call
   defdelegate get_user_by_id(params), to: GetUser, as: :by_id
+  defdelegate fetch_all_users(), to: GetUser, as: :index
 end

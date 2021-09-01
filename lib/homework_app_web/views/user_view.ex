@@ -15,9 +15,9 @@ defmodule HomeworkAppWeb.UserView do
     }
   end
 
-  def render("users.json", %{user: %User{} = user}) do
+  def render("users.json", %{user: users}) do
     %{
-      user: user
+      users: users
     }
   end
 end

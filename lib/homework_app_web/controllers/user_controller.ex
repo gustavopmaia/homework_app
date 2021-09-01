@@ -3,7 +3,7 @@ defmodule HomeworkAppWeb.UserController do
   alias HomeworkApp.Schemas.User
 
   def index(conn, _params) do
-    with {:ok, %User{} = user} <- HomeworkApp.User.Get.index() do
+    with {:ok, user} <- HomeworkApp.fetch_all_users() do
       conn
       |> put_status(:ok)
       |> render("users.json", user: user)
