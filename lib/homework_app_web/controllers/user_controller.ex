@@ -9,7 +9,7 @@ defmodule HomeworkAppWeb.UserController do
   end
 
   def show(conn, %{"id" => id}) do
-    HomeworkApp.User.Get.show(conn, id)
+    HomeworkApp.User.Get.show(id)
   end
 
   def create(conn, params) do
