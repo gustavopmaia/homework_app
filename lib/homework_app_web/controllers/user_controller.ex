@@ -1,6 +1,7 @@
 defmodule HomeworkAppWeb.UserController do
   use HomeworkAppWeb, :controller
   alias HomeworkApp.Repo
+  alias HomeworkApp.Schemas.User
 
   defp conn_with_status(conn, nil) do
     conn
@@ -22,8 +23,10 @@ defmodule HomeworkAppWeb.UserController do
   end
 
   def create(conn, params) do
-    Conn |> put_status(:created) |> HomeworkApp.Create.call_user(params)
 
-    with {:ok, %{}} <- HomeworkApp.Create.call_user(params) do conn |> put_status(:create) |> text("Usuário criado") end
+    with {:ok, %User{} = user} <- HomeworkApp.Create.call_user(params) do
+        conn
+        |> put_status(:create)
+        |> render("create.json", user: user) end
   end
 end
