@@ -31,6 +31,6 @@ config :phoenix, :json_library, Jason
 # of this file so it overrides the configuration defined above.
 import_config "#{Mix.env()}.exs"
 
-config :my_app, HomeworkApp.Guardian,
+config :homework_app, HomeworkApp.Guardian,
     issuer: "homework_app",
     secret_key: "bN7ogemkA57kEE2NpGn2vu++r+1g/tBggSYjymXayxOQVLAuy0CLQjBBwPkfrSRh"

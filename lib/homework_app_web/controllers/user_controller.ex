@@ -2,6 +2,8 @@ defmodule HomeworkAppWeb.UserController do
   use HomeworkAppWeb, :controller
   alias HomeworkApp.Schemas.User
 
+  action_fallback HomeworkAppWeb.FallbackController
+
   def index(conn, _params) do
     with {:ok, user} <- HomeworkApp.fetch_all_users() do
       conn
@@ -21,10 +23,18 @@ defmodule HomeworkAppWeb.UserController do
   end
 
   def create(conn, params) do
-    with {:ok, %User{} = user} <- HomeworkApp.create_user(params) do
-      conn
-      |> put_status(:created)
-      |> render("create.json", user: user)
+    # with {:ok, %User{} = user} <- HomeworkApp.create_user(params) do
+    #   conn
+    #   |> put_status(:created)
+    #   |> render("create.json", user: user)
+    # end
+
+    case HomeworkApp.create_user(params) do
+      {:ok, %User{} = user} ->
+        conn
+        |> put_status(:created)
+        |> render("create.json", user: user)
+      _ -> {:error, :unauthorized}
     end
   end
 end
