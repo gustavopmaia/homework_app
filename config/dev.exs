@@ -3,7 +3,7 @@ use Mix.Config
 # Configure your database
 config :homework_app, HomeworkApp.Repo,
   username: "postgres",
-  password: "postgres",
+  password: System.get_env("DB_PASSWORD"),
   database: "homework_app_dev",
   hostname: "localhost",
   show_sensitive_data_on_connection_error: true,

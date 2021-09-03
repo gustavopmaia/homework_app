@@ -5,12 +5,21 @@ defmodule HomeworkAppWeb.Router do
     plug :accepts, ["json"]
   end
 
+  pipeline :auth do
+    plug HomeworkAppWeb.Auth.Pipeline
+  end
+
   scope "/api", HomeworkAppWeb do
     pipe_through :api
 
     get "/users", UserController, :index
-    get "/users/:id", UserController, :show
     post "/users", UserController, :create
+  end
+
+  scope "/api", HomeworkAppWeb do
+    pipe_through [:api, :auth]
+
+    get "/users/:id", UserController, :show
   end
 
   # Enables LiveDashboard only for development

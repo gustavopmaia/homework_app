@@ -32,5 +32,9 @@ config :phoenix, :json_library, Jason
 import_config "#{Mix.env()}.exs"
 
 config :homework_app, HomeworkApp.Guardian,
-    issuer: "homework_app",
-    secret_key: "bN7ogemkA57kEE2NpGn2vu++r+1g/tBggSYjymXayxOQVLAuy0CLQjBBwPkfrSRh"
+  issuer: "homework_app",
+  secret_key: System.get_env("SECRET_KEY_BASE")
+
+config :homework_app, HomeworkAppWeb.Auth.Pipeline,
+  module: HomeworkAppWeb.Auth.Guardian,
+  error_handler: HomeworkAppWeb.Auth.ErrorHandler

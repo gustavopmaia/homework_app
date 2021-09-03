@@ -9,6 +9,13 @@ defmodule HomeworkApp.User.Get do
     end
   end
 
+  def by_email(email) do
+    case Repo.get_by(User, email: email) do
+      nil -> {:error, "Usuário não encontrado"}
+      user -> {:ok, user}
+    end
+  end
+
   def index() do
     case Repo.all(User) do
       nil -> {:error, "Erro ao exibir usuarios"}

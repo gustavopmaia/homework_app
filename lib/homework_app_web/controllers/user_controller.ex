@@ -23,18 +23,14 @@ defmodule HomeworkAppWeb.UserController do
   end
 
   def create(conn, params) do
-    # with {:ok, %User{} = user} <- HomeworkApp.create_user(params) do
-    #   conn
-    #   |> put_status(:created)
-    #   |> render("create.json", user: user)
-    # end
-
     case HomeworkApp.create_user(params) do
       {:ok, %User{} = user} ->
         conn
         |> put_status(:created)
         |> render("create.json", user: user)
-      _ -> {:error, :unauthorized}
+
+      _ ->
+        {:error, :unauthorized}
     end
   end
 end
