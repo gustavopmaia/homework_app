@@ -12,14 +12,20 @@ defmodule HomeworkAppWeb.Router do
   scope "/api", HomeworkAppWeb do
     pipe_through :api
 
-    get "/users", UserController, :index
     post "/users", UserController, :create
   end
 
   scope "/api", HomeworkAppWeb do
     pipe_through [:api, :auth]
 
+    get "/users", UserController, :index
     get "/users/:id", UserController, :show
+  end
+
+  scope "/auth", HomeworkAppWeb do
+    pipe_through :api
+
+    get "/login/:email", AuthController, :login
   end
 
   # Enables LiveDashboard only for development

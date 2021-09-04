@@ -13,11 +13,19 @@ config :homework_app,
 # Configures the endpoint
 config :homework_app, HomeworkAppWeb.Endpoint,
   url: [host: "localhost"],
-  secret_key_base: "+YsO5JU1sIh51jIXBiZd34Pk345l/IQ5eUEhvp13jY7LD22zVtAGguzZMhdlM6PY",
+  secret_key_base: System.get_env("SECRET_KEY_BASE"),
   render_errors: [view: HomeworkAppWeb.ErrorView, accepts: ~w(json), layout: false],
   pubsub_server: HomeworkApp.PubSub,
   live_view: [signing_salt: "DvUVm42o"],
   generators: [binary_id: true]
+
+config :homework_app, HomeworkAppWeb.Auth.Guardian,
+  issuer: "homework_app",
+  secret_key: System.get_env("SECRET_KEY")
+
+config :homework_app, HomeworkAppWeb.Auth.Pipeline,
+  module: HomeworkAppWeb.Auth.Guardian,
+  error_handler: HomeworkAppWeb.Auth.ErrorHandler
 
 # Configures Elixir's Logger
 config :logger, :console,
@@ -30,11 +38,3 @@ config :phoenix, :json_library, Jason
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
 import_config "#{Mix.env()}.exs"
-
-config :homework_app, HomeworkApp.Guardian,
-  issuer: "homework_app",
-  secret_key: System.get_env("SECRET_KEY_BASE")
-
-config :homework_app, HomeworkAppWeb.Auth.Pipeline,
-  module: HomeworkAppWeb.Auth.Guardian,
-  error_handler: HomeworkAppWeb.Auth.ErrorHandler

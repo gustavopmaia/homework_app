@@ -1,4 +1,4 @@
-defmodule HomeworkAppWeb.Guardian do
+defmodule HomeworkAppWeb.Auth.Guardian do
     use Guardian, otp_app: :homework_app
     alias HomeworkApp.User.Get
     alias HomeworkApp.Schemas.User
