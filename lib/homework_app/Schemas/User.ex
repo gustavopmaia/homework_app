@@ -27,7 +27,7 @@ defmodule HomeworkApp.Schemas.User do
   defp put_password_hash(
          %Ecto.Changeset{valid?: true, changes: %{password: password}} = changeset
        ) do
-    change(changeset, password: Argon2.hash_pwd_salt(password))
+        change(changeset, Argon2.add_hash(password, hash_key: :password))
   end
 
   defp put_password_hash(changeset), do: changeset

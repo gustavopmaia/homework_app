@@ -25,7 +25,7 @@ defmodule HomeworkAppWeb.Router do
   scope "/auth", HomeworkAppWeb do
     pipe_through :api
 
-    get "/login/:email", AuthController, :login
+    post "/login", AuthController, :login
   end
 
   # Enables LiveDashboard only for development
