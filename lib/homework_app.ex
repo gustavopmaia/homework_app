@@ -23,4 +23,5 @@ defmodule HomeworkApp do
 
   defdelegate create_asnwer(params), to: CreateAnswer, as: :call_answer
   defdelegate fetch_all_answers(), to: GetAnswer, as: :index
+  defdelegate get_answer_by_id(params), to: GetAnswer, as: :by_id
 end

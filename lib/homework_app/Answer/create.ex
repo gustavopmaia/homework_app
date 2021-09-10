@@ -9,7 +9,8 @@ defmodule HomeworkApp.Answer.Create do
       |> Repo.insert()
 
     with {:ok, answer} <- result do
-      Repo.preload(answer, :question)
+      answer = Repo.preload answer, [[:question, :user], question: [:user]]
+      {:ok, answer}
     end
   end
 end

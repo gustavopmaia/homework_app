@@ -21,4 +21,12 @@ defmodule HomeworkAppWeb.AnswerController do
         {:error, :unauthorized}
     end
   end
+
+  def show(conn, %{"id" => id}) do
+    with {:ok, %Answers{} = answer} <- HomeworkApp.get_answer_by_id(id) do
+      conn
+      |> put_status(:ok)
+      |> render("answer.json", answer: answer)
+    end
+  end
 end

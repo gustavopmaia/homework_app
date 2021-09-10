@@ -26,6 +26,7 @@ defmodule HomeworkAppWeb.Router do
     post "/questions", QuestionController, :create
 
     get "/answers", AnswerController, :index
+    get "/answers/:id", AnswerController, :show
     post "/answers", AnswerController, :create
   end
 

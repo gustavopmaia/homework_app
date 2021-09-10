@@ -5,7 +5,6 @@ defmodule HomeworkApp.Schemas.Questions do
   @primary_key {:id, :binary_id, autogenerate: true}
 
   @derive {Jason.Encoder, only: [:id, :content, :user]}
-
   schema "questions" do
     belongs_to :user, HomeworkApp.Schemas.User, type: :binary_id
     field :content, :string
