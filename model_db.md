@@ -19,3 +19,4 @@ autor
 conteudo
 id da resposta/pergunta em que ele ta escrito
 ---------------
+

@@ -5,7 +5,7 @@ defmodule HomeworkApp.Schemas.User do
 
   @primary_key {:id, :binary_id, autogenerate: true}
 
-  @derive {Jason.Encoder, only: [:id, :username, :email]}
+  @derive {Jason.Encoder, only: [:id, :username]}
 
   schema "users" do
     field :username, :string, size: 15
@@ -27,7 +27,7 @@ defmodule HomeworkApp.Schemas.User do
   defp put_password_hash(
          %Ecto.Changeset{valid?: true, changes: %{password: password}} = changeset
        ) do
-        change(changeset, Argon2.add_hash(password, hash_key: :password))
+    change(changeset, Argon2.add_hash(password, hash_key: :password))
   end
 
   defp put_password_hash(changeset), do: changeset

@@ -13,8 +13,6 @@ defmodule HomeworkAppWeb.UserController do
   end
 
   def show(conn, %{"id" => id}) do
-    IO.inspect(id)
-
     with {:ok, %User{} = user} <- HomeworkApp.get_user_by_id(id) do
       conn
       |> put_status(:ok)

@@ -4,7 +4,7 @@ defmodule HomeworkApp.Repo.Migrations.AddQuestionsTable do
   def change do
     create table(:questions, primary_key: false) do
       add :id, :binary_id, primary_key: true
-      add :username, :string
+      add :user_id, references(:users, type: :binary_id), null: false
       add :content, :string
     end
   end

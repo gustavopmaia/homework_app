@@ -6,13 +6,15 @@ defmodule HomeworkApp.Schemas.Answers do
 
   schema "answers" do
     belongs_to :question, HomeworkApp.Schemas.Questions, type: :binary_id
-    field :username, :string
+    belongs_to :user, HomeworkApp.Schemas.User, type: :binary_id
     field :content, :string
   end
 
   def changeset(answers \\ %__MODULE__{}, attrs) do
     answers
-    |> cast(attrs, [:username, :content, :question_id])
-    |> validate_required([:username, :content])
+    |> cast(attrs, [:content, :question_id, :user_id])
+    |> validate_required([:content, :question_id, :user_id])
+    |> foreign_key_constraint(:question_id)
+    |> foreign_key_constraint(:user_id)
   end
 end
