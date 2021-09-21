@@ -19,4 +19,10 @@ defmodule HomeworkAppWeb.AnswerView do
       answer: answer
     }
   end
+
+  def render("update_answer.json", %{answer: %Answers{} = answer}) do
+    %{
+      answer: answer
+    }
+  end
 end

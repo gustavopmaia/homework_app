@@ -29,4 +29,27 @@ defmodule HomeworkAppWeb.AnswerController do
       |> render("answer.json", answer: answer)
     end
   end
+
+  def update(conn, params) do
+    with {:ok, answer} <- HomeworkApp.Answer.Update.update_answer(params) do
+      conn
+      |> put_status(:ok)
+      |> render("update_answer.json", answer: answer)
+    else
+      _ -> {:error, :unauthorized}
+    end
+  end
+
+  def check_user(
+        conn = %{params: %{"user_id" => id}, assigns: %{current_user: current_user}},
+        _opts
+      ) do
+    # IO.inspect(conn)
+
+    if id != current_user.id do
+      {:error, :unauthorized}
+    else
+      conn
+    end
+  end
 end

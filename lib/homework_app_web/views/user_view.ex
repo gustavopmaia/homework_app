@@ -4,20 +4,26 @@ defmodule HomeworkAppWeb.UserView do
 
   def render("user.json", %{user: %User{} = user}) do
     %{
-      user: user
+      user: %{id: user.id, username: user.username}
     }
   end
 
   def render("create.json", %{user: %User{} = user}) do
     %{
       message: "User created",
-      user: user
+      user: render_one(user, __MODULE__, "user.json")
     }
   end
 
   def render("users.json", %{user: users}) do
     %{
-      users: users
+      users: render_many(users, __MODULE__, "user.json")
+    }
+  end
+
+  def render("update_user.json", %{user: user}) do
+    %{
+      user: render_one(user, __MODULE__, "user.json")
     }
   end
 end

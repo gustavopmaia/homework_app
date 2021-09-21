@@ -1,8 +1,11 @@
 defmodule HomeworkApp do
   alias HomeworkApp.User.Create, as: CreateUser
   alias HomeworkApp.User.Get, as: GetUser
+  alias HomeworkApp.User.Update, as: UpdateUser
+
   alias HomeworkApp.Question.Get, as: GetQuestion
   alias HomeworkApp.Question.Create, as: CreateQuestion
+
   alias HomeworkApp.Answer.Get, as: GetAnswer
   alias HomeworkApp.Answer.Create, as: CreateAnswer
 
@@ -16,6 +19,7 @@ defmodule HomeworkApp do
   defdelegate create_user(params), to: CreateUser, as: :call
   defdelegate get_user_by_id(params), to: GetUser, as: :by_id
   defdelegate fetch_all_users(), to: GetUser, as: :index
+  defdelegate update_user(params), to: UpdateUser, as: :update_user
 
   defdelegate create_question(params), to: CreateQuestion, as: :call_question
   defdelegate fetch_all_questions(), to: GetQuestion, as: :index

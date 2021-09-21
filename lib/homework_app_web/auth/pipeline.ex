@@ -4,4 +4,5 @@ defmodule HomeworkAppWeb.Auth.Pipeline do
   plug Guardian.Plug.VerifyHeader
   plug Guardian.Plug.LoadResource
   plug Guardian.Plug.EnsureAuthenticated
+  plug HomeworkAppWeb.Plugs.CurrentUser
 end

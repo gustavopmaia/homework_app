@@ -5,6 +5,7 @@ defmodule HomeworkAppWeb.Auth.Guardian do
 
   def subject_for_token(%{email: email}, claims) do
     IO.inspect(claims)
+
     {:ok, %User{id: id}} = Get.by_email(email)
     {:ok, id}
   end

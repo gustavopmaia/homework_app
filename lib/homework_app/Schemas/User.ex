@@ -24,6 +24,11 @@ defmodule HomeworkApp.Schemas.User do
     |> put_password_hash()
   end
 
+  def update_changeset(user \\ %__MODULE__{}, attrs) do
+    user
+    |> cast(attrs, [:username, :email, :password])
+  end
+
   defp put_password_hash(
          %Ecto.Changeset{valid?: true, changes: %{password: password}} = changeset
        ) do

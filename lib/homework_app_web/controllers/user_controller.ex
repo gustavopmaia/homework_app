@@ -3,6 +3,7 @@ defmodule HomeworkAppWeb.UserController do
   alias HomeworkApp.Schemas.User
 
   action_fallback HomeworkAppWeb.FallbackController
+  plug :check_user when action in [:update]
 
   def index(conn, _params) do
     with {:ok, user} <- HomeworkApp.fetch_all_users() do
@@ -29,6 +30,26 @@ defmodule HomeworkAppWeb.UserController do
 
       _ ->
         {:error, :unauthorized}
+    end
+  end
+
+  def update(conn, params) do
+    with {:ok, user} <- HomeworkApp.User.Update.update_user(params) do
+      conn
+      |> put_status(:ok)
+      |> render("update_user.json", user: user)
+    else
+      _ -> {:error, :unauthorized}
+    end
+  end
+
+  def check_user(conn = %{params: %{"id" => id}, assigns: %{current_user: current_user}}, _opts) do
+    # IO.inspect(conn)
+
+    if id != current_user.id do
+      {:error, :unauthorized}
+    else
+      conn
     end
   end
 end

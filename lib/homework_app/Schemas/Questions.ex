@@ -5,6 +5,7 @@ defmodule HomeworkApp.Schemas.Questions do
   @primary_key {:id, :binary_id, autogenerate: true}
 
   @derive {Jason.Encoder, only: [:id, :content, :user]}
+
   schema "questions" do
     belongs_to :user, HomeworkApp.Schemas.User, type: :binary_id
     field :content, :string
@@ -15,5 +16,10 @@ defmodule HomeworkApp.Schemas.Questions do
     |> cast(attrs, [:content, :user_id])
     |> validate_required([:content, :user_id])
     |> foreign_key_constraint(:user_id)
+  end
+
+  def update_changeset(questions \\ %__MODULE__{}, attrs) do
+    questions
+    |> cast(attrs, [:content])
   end
 end

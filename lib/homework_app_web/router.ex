@@ -20,14 +20,17 @@ defmodule HomeworkAppWeb.Router do
 
     get "/users", UserController, :index
     get "/users/:id", UserController, :show
+    patch "/users/:id", UserController, :update
 
     get "/questions", QuestionController, :index
     get "/questions/:id", QuestionController, :show
     post "/questions", QuestionController, :create
+    patch "/questions/:id", QuestionController, :update
 
     get "/answers", AnswerController, :index
     get "/answers/:id", AnswerController, :show
     post "/answers", AnswerController, :create
+    patch "/answers/:id", AnswerController, :update
   end
 
   scope "/auth", HomeworkAppWeb do

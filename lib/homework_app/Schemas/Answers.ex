@@ -19,4 +19,9 @@ defmodule HomeworkApp.Schemas.Answers do
     |> foreign_key_constraint(:question_id)
     |> foreign_key_constraint(:user_id)
   end
+
+  def update_changeset(answer \\ %__MODULE__{}, attrs) do
+    answer
+    |> cast(attrs, [:content])
+  end
 end

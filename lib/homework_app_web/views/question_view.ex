@@ -19,4 +19,10 @@ defmodule HomeworkAppWeb.QuestionView do
       question: question
     }
   end
+
+  def render("update_question.json", %{question: %Questions{} = question}) do
+    %{
+      question: question
+    }
+  end
 end
