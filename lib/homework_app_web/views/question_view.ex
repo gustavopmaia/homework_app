@@ -25,4 +25,10 @@ defmodule HomeworkAppWeb.QuestionView do
       question: question
     }
   end
+
+  def render("delete_question.json", %{question: _question}) do
+    %{
+      message: "Question deleted"
+    }
+  end
 end

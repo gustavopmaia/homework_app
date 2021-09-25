@@ -22,6 +22,7 @@ defmodule HomeworkApp.Schemas.User do
     |> validate_format(:email, ~r/@/)
     |> unique_constraint(:email)
     |> put_password_hash()
+    |> foreign_key_constraint(:name)
   end
 
   def update_changeset(user \\ %__MODULE__{}, attrs) do

@@ -43,13 +43,31 @@ defmodule HomeworkAppWeb.UserController do
     end
   end
 
-  def check_user(conn = %{params: %{"id" => id}, assigns: %{current_user: current_user}}, _opts) do
-    # IO.inspect(conn)
-
-    if id != current_user.id do
-      {:error, :unauthorized}
-    else
+  def delete(conn, params) do
+    with {:ok, user} <- HomeworkApp.User.Delete.delete_user(params) do
       conn
+      |> put_status(:ok)
+      |> render("delete_user.json", user: user)
     end
+  end
+
+  # def check_user(conn = %{params: %{"id" => id}, assigns: %{current_user: current_user}}, _opts) do
+  #   # IO.inspect(conn)
+
+  #   if id != current_user.id do
+  #     {:error, :unauthorized}
+  #   else
+  #     conn
+  #   end
+  # end
+
+  def check_user(conn = %{params: %{"id" => id}, assigns: %{current_user: current_user}}, _opts)
+      when id == current_user.id do
+    conn
+  end
+
+  def check_user(_conn = %{params: %{"id" => id}, assigns: %{current_user: current_user}}, _opts)
+      when id == current_user.id do
+    {:error, :unauthorized}
   end
 end

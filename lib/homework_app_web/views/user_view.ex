@@ -26,4 +26,10 @@ defmodule HomeworkAppWeb.UserView do
       user: render_one(user, __MODULE__, "user.json")
     }
   end
+
+  def render("delete_user.json", %{user: _user}) do
+    %{
+      message: "User deleted"
+    }
+  end
 end

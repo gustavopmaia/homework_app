@@ -40,16 +40,21 @@ defmodule HomeworkAppWeb.AnswerController do
     end
   end
 
-  def check_user(
-        conn = %{params: %{"user_id" => id}, assigns: %{current_user: current_user}},
-        _opts
-      ) do
-    # IO.inspect(conn)
-
-    if id != current_user.id do
-      {:error, :unauthorized}
-    else
+  def delete(conn, params) do
+    with {:ok, answer} <- HomeworkApp.Answer.Delete.delete_answer(params) do
       conn
+      |> put_status(:ok)
+      |> render("delete_answer.json", answer: answer)
     end
+  end
+
+  def check_user(conn = %{params: %{"id" => id}, assigns: %{current_user: current_user}}, _opts)
+      when id == current_user.id do
+    conn
+  end
+
+  def check_user(_conn = %{params: %{"id" => id}, assigns: %{current_user: current_user}}, _opts)
+      when id == current_user.id do
+    {:error, :unauthorized}
   end
 end

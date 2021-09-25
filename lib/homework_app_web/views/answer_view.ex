@@ -25,4 +25,10 @@ defmodule HomeworkAppWeb.AnswerView do
       answer: answer
     }
   end
+
+  def render("delete_answer.json", %{answer: _answer}) do
+    %{
+      message: "Answer deleted"
+    }
+  end
 end
